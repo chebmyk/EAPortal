@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: eaportal_db
+      username: eaportal_user
+      password: eaportalpassword
