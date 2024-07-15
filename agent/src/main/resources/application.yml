@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eagent
+
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      config:
+        enabled: false
+
+#  host: localhost
+#  port: 2181
+server:
+  port: 8081
