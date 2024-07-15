@@ -6,3 +6,5 @@ spring:
       database: eaportal_db
       username: eaportal_user
       password: eaportalpassword
+server:
+  port: 8083

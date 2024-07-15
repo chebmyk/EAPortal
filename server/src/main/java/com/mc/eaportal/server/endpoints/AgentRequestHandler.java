@@ -60,10 +60,10 @@ public class AgentRequestHandler {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
-    public Mono<ServerResponse> generate(ServerRequest request) {
-        Flux<Agent> agents = agentService.generateAgent();
-        return ServerResponse.ok().body(agents, Agent.class);
-    }
+//    public Mono<ServerResponse> generate(ServerRequest request) {
+//        Flux<Agent> agents = agentService.generateAgent();
+//        return ServerResponse.ok().body(agents, Agent.class);
+//    }
 
 
 }

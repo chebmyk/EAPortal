@@ -25,7 +25,7 @@ public class AgentRouter {
             @RouterOperation(path = "/agents", method = RequestMethod.POST, beanClass = AgentRequestHandler.class, beanMethod = "createAgent"),
             @RouterOperation(path = "/agents/{id}", method = RequestMethod.PUT, beanClass = AgentRequestHandler.class, beanMethod = "updateAgent"),
             @RouterOperation(path = "/agents/{id}", method = RequestMethod.DELETE, beanClass = AgentRequestHandler.class, beanMethod = "deleteAgent"),
-            @RouterOperation(path = "/agents/generate", method = RequestMethod.GET, beanClass = AgentRequestHandler.class, beanMethod = "generate")
+            @RouterOperation(path = "/generate", method = RequestMethod.GET, beanClass = AgentRequestHandler.class, beanMethod = "generate")
     }
     )
     @Bean
@@ -36,7 +36,8 @@ public class AgentRouter {
                 .andRoute(POST("/agents"), agentRequestHandler::createAgent)
                 .andRoute(PUT("/agents/{id}"), agentRequestHandler::updateAgent)
                 .andRoute(DELETE("/agents/{id}"), agentRequestHandler::deleteAgent)
-                .andRoute(GET("/agents/generate"), agentRequestHandler::generate);
+                //.andRoute(GET("/generate"), agentRequestHandler::generate)
+                ;
 
     }
 }

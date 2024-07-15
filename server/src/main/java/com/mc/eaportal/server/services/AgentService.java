@@ -11,6 +11,7 @@ import java.util.List;
 
 @Component
 public class AgentService {
+
     private AgentRepository agentRepository;
 
     public AgentService(AgentRepository agentRepository) {
@@ -34,7 +35,7 @@ public class AgentService {
         return agentRepository.findById(agentId);
     }
 
-    //generate method that insert 1000 rendom  records to Agent table
+
     public Flux<Agent> generateAgent() {
         List<Agent> agents = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
