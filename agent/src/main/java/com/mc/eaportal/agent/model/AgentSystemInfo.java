@@ -1,4 +1,4 @@
-package com.mc.eaportal.agent;
+package com.mc.eaportal.agent.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

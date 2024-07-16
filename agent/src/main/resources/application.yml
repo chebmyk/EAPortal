@@ -6,7 +6,20 @@ spring:
     zookeeper:
       connect-string: localhost:2181
       config:
-        enabled: false
+        enabled: true
+        root: configuration
+        defaultContext: apps
+      discovery:
+        enabled: true
+      dependency:
+        enabled: true
+
+
+
+  config:
+    import: "optional:zookeeper:"
+
+
 
 #  host: localhost
 #  port: 2181
