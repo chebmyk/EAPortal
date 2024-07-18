@@ -8,6 +8,10 @@ import org.springframework.cloud.zookeeper.discovery.ZookeeperDiscoveryPropertie
 import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class AppZookeeperServiceImpl  implements AppZookeeperService {
     private CuratorFramework curatorFramework;
@@ -23,15 +27,8 @@ public class AppZookeeperServiceImpl  implements AppZookeeperService {
                 .build();
     }
 
-    public ServiceInstance<ZookeeperInstance> getInstanceByName(String serviceName) {
-        try {
-            return serviceDiscovery.queryForInstances(serviceName).stream()
-                    .filter(i -> i.getName().equals(serviceName))
-                    .findFirst()
-                    .orElse(null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public Collection<ServiceInstance<ZookeeperInstance>>  getInstanceByName(String serviceName) throws Exception {
+            return serviceDiscovery.queryForInstances(serviceName);
     }
 
 }

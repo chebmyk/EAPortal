@@ -24,7 +24,7 @@ public class AgentConfig {
     public ZookeeperRegistration getZookeeperRegistration(ApplicationContext context, ZookeeperServiceRegistry serviceRegistry) throws UnknownHostException {
 
 
-        //SystemInfo systemInfo = new SystemInfo();
+        SystemInfo systemInfo = new SystemInfo();
         //systemInfo.getOperatingSystem().getNetworkParams().getHostName()
 
 
@@ -34,6 +34,13 @@ public class AgentConfig {
         properties.putIfAbsent("os.arch", System.getProperty("os.arch", "N/A"));
         properties.putIfAbsent("os.version", System.getProperty("os.version", "N/A"));
 
+        properties.putIfAbsent("cpu.name", systemInfo.getHardware().getProcessor().getProcessorIdentifier().getName());
+        properties.putIfAbsent("cpu.frequency", String.valueOf(systemInfo.getHardware().getProcessor().getMaxFreq()));
+        properties.putIfAbsent("cpu.model", String.valueOf(systemInfo.getHardware().getProcessor().getProcessorIdentifier().getModel()));
+        properties.putIfAbsent("cpu.cores", String.valueOf(systemInfo.getHardware().getProcessor().getPhysicalProcessorCount()));
+
+        properties.putIfAbsent("memory.total", String.valueOf(systemInfo.getHardware().getMemory().getTotal()));
+
         String hostname = InetAddress.getLocalHost().getCanonicalHostName();
 
         ZookeeperInstance zookeeperInstance = new ZookeeperInstance(context.getId(),
@@ -41,7 +48,7 @@ public class AgentConfig {
 
 
         return  ServiceInstanceRegistration.builder()
-                .name("eagents/"+hostname)
+                .name("eagents")
                 .serviceType(ServiceType.DYNAMIC)
                 .address(hostname)
                 .payload(zookeeperInstance)

@@ -1,0 +1,50 @@
+<div class="grid">
+
+  <div class="col-12">
+    <div class="grid">
+      <div class="col-fixed" style="width:100px">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold">
+          <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Logo</a>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold">Application Portal</div>
+      </div>
+
+      <div class="col-fixed" style="width:100px">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold">Login</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="grid">
+
+      <div class="col-fixed" style="width:300px">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold">
+
+          <nav>
+            <ul>
+              <li>
+                <a routerLink="/agents" routerLinkActive="active" ariaCurrentWhenActive="page">Agents</a>
+              </li>
+            </ul>
+          </nav>
+
+
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="text-center p-3 border-round-sm bg-primary font-bold">
+
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

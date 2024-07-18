@@ -14,12 +14,8 @@ spring:
       dependency:
         enabled: true
 
-
-
   config:
     import: "optional:zookeeper:"
-
-
 
 #  host: localhost
 #  port: 2181

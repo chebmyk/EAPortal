@@ -1,0 +1,12 @@
+<div class="flex flex-wrap" style="max-width: 500px">
+
+
+<!--  <div class="flex align-items-center justify-content-center bg-primary font-bold m-2 border-round" style="min-width: 200px; min-height: 100px">-->
+    <ng-container *ngFor="let agent of agents">
+
+      <agent-card [agent]="agent"></agent-card>
+
+    </ng-container>
+<!--  </div>-->
+
+</div>

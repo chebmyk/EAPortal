@@ -1,0 +1,32 @@
+
+<div class="flex flex-column flex-wrap">
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.id }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.address }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.name }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["os.name"] }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["cpu.name"] }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["cpu.frequency"] }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["cpu.model"] }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["cpu.cores"] }}
+  </div>
+  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
+    {{ agent.payload.metadata["memory.total"] }}
+  </div>
+</div>
+
+
