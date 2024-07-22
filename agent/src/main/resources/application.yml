@@ -13,11 +13,24 @@ spring:
         enabled: true
       dependency:
         enabled: true
+      dependencies:
+        eagents:
+          path: eagents
+          version: v1
+          required: false
 
   config:
     import: "optional:zookeeper:"
+
+
 
 #  host: localhost
 #  port: 2181
 server:
   port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

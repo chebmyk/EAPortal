@@ -6,5 +6,24 @@ spring:
       database: eaportal_db
       username: eaportal_user
       password: eaportalpassword
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+      config:
+        enabled: true
+        root: configuration
+        defaultContext: apps
+      discovery:
+        enabled: true
+      dependency:
+        enabled: true
+      dependencies:
+        eagents:
+          path: eagents
+          version: v1
+          required: false
+
+  config:
+    import: "optional:zookeeper:"
 server:
   port: 8083

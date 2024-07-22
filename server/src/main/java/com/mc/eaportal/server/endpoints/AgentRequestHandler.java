@@ -2,8 +2,10 @@ package com.mc.eaportal.server.endpoints;
 
 import com.mc.eaportal.server.domain.model.entity.Agent;
 import com.mc.eaportal.server.services.AgentService;
+import com.mc.eaportal.server.services.ZookeeperService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -19,10 +21,15 @@ public class AgentRequestHandler {
     @Autowired
     private AgentService agentService;
 
+    @Autowired
+    private ZookeeperService    zookeeperService;
+
 
     @Operation(summary = "Get All Agents")
     public Mono<ServerResponse> getAgents(ServerRequest request) {
-        Flux<Agent> agents = agentService.getAgents();
+
+        Flux<ServiceInstance> agents = Flux.fromIterable(zookeeperService.getAgents());
+        //Flux<Agent> agents = agentService.getAgents();
         return ServerResponse.ok().body(agents, Agent.class);
     }
 

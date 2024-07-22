@@ -1,32 +1,33 @@
 
-<div class="flex flex-column flex-wrap">
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.id }}
+<p-card header="{{ agent.id }}">
+  <div class="flex flex-column flex-wrap">
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      Agent Adress: {{ agent.address }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      Agent name: {{ agent.name }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      OS: {{ agent.payload.metadata["os.name"] }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      CPU: {{ agent.payload.metadata["cpu.name"] }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      CPU Freq:{{ agent.payload.metadata["cpu.frequency"]/(1000*1000*1000) }} GHz
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      CPU Model: {{ agent.payload.metadata["cpu.model"] }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      CPU Cores: {{ agent.payload.metadata["cpu.cores"] }}
+    </div>
+    <div class="flex align-items-left justify-content-left border-round m-2">
+      RAM: {{ agent.payload.metadata["memory.total"]/1024/1024/1024 }} Gb
+    </div>
   </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.address }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.name }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["os.name"] }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["cpu.name"] }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["cpu.frequency"] }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["cpu.model"] }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["cpu.cores"] }}
-  </div>
-  <div class="flex align-items-center justify-content-center h-4rem bg-primary font-bold border-round m-2">
-    {{ agent.payload.metadata["memory.total"] }}
-  </div>
-</div>
+</p-card>
+
+
 
 
