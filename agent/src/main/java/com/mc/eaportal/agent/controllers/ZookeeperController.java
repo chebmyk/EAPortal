@@ -14,6 +14,8 @@ import java.util.Collection;
 @RequestMapping("zookeeper")
 public class ZookeeperController {
 
+    private static final String SERVICE_NAME = "eagents";
+
     private AppZookeeperService appZookeeperService;
 
 
@@ -23,7 +25,7 @@ public class ZookeeperController {
 
     @GetMapping("instance")
     public ResponseEntity<Collection<ServiceInstance<ZookeeperInstance>>> getInstance() throws Exception {
-       Collection<ServiceInstance<ZookeeperInstance>> result = appZookeeperService.getInstanceByName("eagents");
+       Collection<ServiceInstance<ZookeeperInstance>> result = appZookeeperService.getInstanceByName(SERVICE_NAME);
        return ResponseEntity.ok(result);
     }
 }

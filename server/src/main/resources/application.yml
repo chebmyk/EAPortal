@@ -1,11 +1,5 @@
 spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: eaportal_db
-      username: eaportal_user
-      password: eaportalpassword
+
   cloud:
     zookeeper:
       connect-string: localhost:2181
@@ -25,5 +19,6 @@ spring:
 
   config:
     import: "optional:zookeeper:"
+
 server:
   port: 8083

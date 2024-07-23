@@ -2,18 +2,30 @@
 
   <div class="col-12">
     <div class="grid">
-      <div class="col-fixed" style="width:100px">
-        <div class="text-center p-3 border-round-sm  ">
-          <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Logo</a>
+      <div class="col-fixed" style="width:150px">
+        <div class="text-left p-2 border-round-sm  ">
+          <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+            <p-avatar
+              label="AP"
+              styleClass="mr-2"
+              [style]="{'background-color': 'rgba(25,97,222,0.7)', color: '#ffffff' }"
+              shape="circle" />
+          </a> LOGO
         </div>
       </div>
 
       <div class="col">
-        <div class="text-center p-3 border-round-sm  ">Application Portal</div>
+        <div class="text-center p-2 border-round-sm  ">Application Portal</div>
       </div>
 
       <div class="col-fixed" style="width:100px">
-        <div class="text-center p-3 border-round-sm ">Login</div>
+        <div class="text-center p-2 border-round-sm ">
+          <p-avatar
+          icon="pi pi-user"
+          styleClass="mr-2"
+          [style]="{'background-color': 'rgba(25,222,110,0.7)', color: '#ffffff' }"
+          shape="circle" />
+        </div>
       </div>
     </div>
   </div>
@@ -21,14 +33,16 @@
   <div class="col-12">
     <div class="grid">
 
-      <div class="col-fixed" style="width:300px">
-        <div class="text-left p-3 border-round-sm ">
-          <a routerLink="/agents" routerLinkActive="active" ariaCurrentWhenActive="page">Agents</a>
+      <div class="col-fixed" style="width:200px">
+        <div class="text-left border-round-sm ">
+
+          <p-menu [model]="mainMenu" />
+<!--          <a routerLink="/agents" routerLinkActive="active" ariaCurrentWhenActive="page">Agents</a>-->
         </div>
       </div>
 
       <div class="col">
-        <div class="text-center p-3 border-round-sm  ">
+        <div class="border-round-sm">
 
           <router-outlet></router-outlet>
 

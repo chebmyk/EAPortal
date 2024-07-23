@@ -22,10 +22,6 @@ spring:
   config:
     import: "optional:zookeeper:"
 
-
-
-#  host: localhost
-#  port: 2181
 server:
   port: 8081
 

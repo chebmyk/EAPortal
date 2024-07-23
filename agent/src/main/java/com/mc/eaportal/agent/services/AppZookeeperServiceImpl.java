@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AppZookeeperServiceImpl  implements AppZookeeperService {
+
+
     private CuratorFramework curatorFramework;
     private ServiceDiscovery<ZookeeperInstance> serviceDiscovery;
     private ZookeeperDiscoveryProperties zookeeperDiscoveryProperties;

@@ -1,31 +1,71 @@
+<p-card >
 
-<p-card header="{{ agent.id }}">
-  <div class="flex flex-column flex-wrap">
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      Agent Adress: {{ agent.address }}
+  <div class="grid">
+    <div class="col-12">
+      <div class="text-left">
+        Agent: {{ agent.name }}
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      Agent name: {{ agent.name }}
+
+    <div class="col-6">
+      <div class="text-left">
+        <p-avatar
+          icon="pi pi-microchip"
+          [pTooltip]="agent.id"
+          styleClass=""
+          [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
+          shape="circle"
+        /> {{ agent.address }}
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      OS: {{ agent.payload.metadata["os.name"] }}
+    <div class="col-6">
+      <div class="text-right">
+        <i class="pi pi-spin pi-cog" style="font-size: 2rem; color: #0de60d"></i>
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      CPU: {{ agent.payload.metadata["cpu.name"] }}
+
+    <div class="col-2">
+      <div class="text-left">
+        OS
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      CPU Freq:{{ agent.payload.metadata["cpu.frequency"]/(1000*1000*1000) }} GHz
+    <div class="col-10">
+      <div class="text-left flex-shrink-0">
+        {{ agent.payload.metadata["os.name"] }} ver.{{ agent.payload.metadata["os.version"] }}
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      CPU Model: {{ agent.payload.metadata["cpu.model"] }}
+
+    <div class="col-2">
+      <div class="text-left border-round-sm">
+        CPU
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      CPU Cores: {{ agent.payload.metadata["cpu.cores"] }}
+    <div class="col-10">
+      <div class="text-left border-round-sm ">
+<!--        {{ agent.payload.metadata["cpu.model"] }}-->
+        {{ agent.payload.metadata["cpu.name"] }}
+        {{ agent.payload.metadata["cpu.frequency"]/(1000*1000*1000) }} GHz
+        &#64; {{ agent.payload.metadata["cpu.cores"] }} Cores
+      </div>
     </div>
-    <div class="flex align-items-left justify-content-left border-round m-2">
-      RAM: {{ agent.payload.metadata["memory.total"]/1024/1024/1024 }} Gb
+    <div class="col-2">
+      <div class="text-left border-round-sm">
+        RAM
+      </div>
     </div>
+    <div class="col-8">
+      <div class="text-left border-round-sm ">
+        <p-meterGroup [value]="memoryUsageBoard" />
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="text-right border-round-sm ">
+        {{mem_current/1024/1024/1024 | number: '1.0-4'}} GB
+      </div>
+    </div>
+
   </div>
+
 </p-card>
 
 

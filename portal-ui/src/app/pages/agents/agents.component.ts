@@ -9,7 +9,7 @@ import {Agent} from "../../model/agents";
   standalone: true,
   imports: [AgentCardComponent, NgFor],
   templateUrl: './agents.component.html',
-  styleUrl: './agents.component.css'
+  styleUrl: './agents.component.scss'
 })
 export class AgentsComponent implements OnInit{
 
@@ -21,13 +21,13 @@ export class AgentsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("Init agentPage")
+
     this.agentService.getAgents()
       .subscribe({
         next: (agents: Agent[]) =>  this.agents = agents ,
         error: (error: any) => console.log(error)
       }
-      )
+      );
   }
 
 }
