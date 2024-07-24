@@ -53,6 +53,21 @@
         &#64; {{ agent.payload.metadata["cpu.cores"] }} Cores
       </div>
     </div>
+
+    <div class="col-2">
+      <div class="text-left border-round-sm">
+        GPU
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="text-left border-round-sm ">
+        {{ agent.payload.metadata["gpu0.vendor"] }}
+        {{ agent.payload.metadata["gpu0.name"] }}
+        {{ agent.payload.metadata["gpu0.frequency"]/(1000*1000*1000) }} GHz
+        &#64; {{ agent.payload.metadata["gpu0.version"] }}
+      </div>
+    </div>
+
     <div class="col-2">
       <div class="text-left border-round-sm">
         RAM

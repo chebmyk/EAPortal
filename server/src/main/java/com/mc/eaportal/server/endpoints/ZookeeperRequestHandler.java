@@ -42,7 +42,7 @@ public class ZookeeperRequestHandler {
     }
 
     public Mono<ServerResponse> memoryStream(ServerRequest serverRequest) {
-        Flux<ServerSentEvent<Long>> cpuStream = Flux.interval(Duration.ofSeconds(1))
+        Flux<ServerSentEvent<Long>> cpuStream = Flux.interval(Duration.ofSeconds(2))
                 .map(i -> systemInfo.getHardware().getMemory().getAvailable())
                 .map(mem -> ServerSentEvent.<Long>builder().data(mem).build());
         return ServerResponse.ok().body(fromServerSentEvents(cpuStream));

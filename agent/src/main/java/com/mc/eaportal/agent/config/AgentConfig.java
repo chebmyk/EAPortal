@@ -16,6 +16,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Configuration
 public class AgentConfig {
@@ -38,6 +39,18 @@ public class AgentConfig {
         properties.putIfAbsent("cpu.frequency", String.valueOf(systemInfo.getHardware().getProcessor().getMaxFreq()));
         properties.putIfAbsent("cpu.model", String.valueOf(systemInfo.getHardware().getProcessor().getProcessorIdentifier().getModel()));
         properties.putIfAbsent("cpu.cores", String.valueOf(systemInfo.getHardware().getProcessor().getPhysicalProcessorCount()));
+
+
+        properties.putIfAbsent("gpu.count", String.valueOf(systemInfo.getHardware().getGraphicsCards().size()));
+        AtomicInteger i = new AtomicInteger();
+        systemInfo.getHardware().getGraphicsCards().forEach(gpu -> {
+            String key = "gpu" + i.getAndIncrement();
+            properties.putIfAbsent(key+".name", gpu.getName());
+            properties.putIfAbsent(key+".frequency", String.valueOf(gpu.getVRam()));
+            properties.putIfAbsent(key+".vendor", String.valueOf(gpu.getVendor()));
+            properties.putIfAbsent(key+".version", String.valueOf(gpu.getVersionInfo()));
+        });
+
 
         properties.putIfAbsent("memory.available", String.valueOf(systemInfo.getHardware().getMemory().getAvailable()));
         properties.putIfAbsent("memory.total", String.valueOf(systemInfo.getHardware().getMemory().getTotal()));
