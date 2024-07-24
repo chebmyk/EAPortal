@@ -6,6 +6,8 @@ import {TooltipModule} from "primeng/tooltip";
 import {AvatarModule} from "primeng/avatar";
 import {AgentsService} from "../agents.service";
 import {DecimalPipe} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Ripple} from "primeng/ripple";
 
 @Component({
   selector: 'agent-card',
@@ -16,6 +18,7 @@ import {DecimalPipe} from "@angular/common";
     TooltipModule,
     AvatarModule,
     DecimalPipe,
+    Ripple,
   ],
   templateUrl: './agent-card.component.html',
   styleUrl: './agent-card.component.scss'
@@ -31,7 +34,13 @@ export class AgentCardComponent implements OnInit {
   mem_current: number = 0;
 
 
-  constructor(private agentsService: AgentsService) {
+
+  constructor(
+    private agentsService: AgentsService,
+    private route: ActivatedRoute,
+    private router: Router
+
+  ) {
   }
 
   ngOnInit(): void {
@@ -56,5 +65,7 @@ export class AgentCardComponent implements OnInit {
   }
 
 
-
+  gotoDetails(id: string) {
+    this.router.navigate([`/agents/${this.agent.id}`]);
+  }
 }

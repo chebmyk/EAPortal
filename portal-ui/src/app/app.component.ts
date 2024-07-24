@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {CommonModule} from "@angular/common";
 import {MenuItem} from "primeng/api";
 import {MenuModule} from "primeng/menu";
@@ -25,6 +25,11 @@ export class AppComponent implements OnInit{
   title = 'portal-ui';
   mainMenu:  MenuItem[] | undefined;
 
+  constructor(
+    private router: Router
+  ) {
+  }
+
   ngOnInit(): void {
     this.mainMenu = [
       {
@@ -33,7 +38,9 @@ export class AppComponent implements OnInit{
           {
             label: 'Agents',
             icon: 'pi pi-microchip',
-            route: '/agents'
+            command: () => {
+                  this.router.navigate(['/agents']);
+            }
           },
           // {
           //   label: 'Applications',

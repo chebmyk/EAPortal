@@ -1,13 +1,13 @@
-<p-card >
+<p-card pRipple class="card styled-box-green shadow-2" (click)="gotoDetails(agent.id)" >
 
-  <div class="grid">
+  <div class="grid" >
     <div class="col-12">
-      <div class="text-left">
+      <div pRipple class=" card text-primary bg-primary flex  justify-content-center align-items-center shadow-2">
         Agent: {{ agent.name }}
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-2">
       <div class="text-left">
         <p-avatar
           icon="pi pi-microchip"
@@ -15,10 +15,15 @@
           styleClass=""
           [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
           shape="circle"
-        /> {{ agent.address }}
+        />
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-8">
+      <div class="text-left">
+        {{ agent.address }}
+      </div>
+    </div>
+    <div class="col-2">
       <div class="text-right">
         <i class="pi pi-spin pi-cog" style="font-size: 2rem; color: #0de60d"></i>
       </div>
