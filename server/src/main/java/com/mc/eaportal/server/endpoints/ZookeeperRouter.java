@@ -26,18 +26,20 @@ public class ZookeeperRouter {
     @RouterOperations({
             @RouterOperation(path = "/zookeeper/instance", method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstansces"),
             @RouterOperation(path = "/zookeeper/instance/{id}", method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstance"),
-            @RouterOperation(path = "/zookeeper/stream/cpu", produces = {MediaType.TEXT_EVENT_STREAM_VALUE} , method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "cpuStream"),
+            @RouterOperation(path = "/zookeeper/stream/memory", produces = {MediaType.TEXT_EVENT_STREAM_VALUE} , method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "memoryStream"),
+            @RouterOperation(path = "/fs/filestream", produces = {MediaType.TEXT_EVENT_STREAM_VALUE} , method = RequestMethod.POST, beanClass = ZookeeperRequestHandler.class, beanMethod = "fileStream")
 
     }
     )
+
     @Bean
     public RouterFunction<ServerResponse> zkInstanceRoutes() {
         return RouterFunctions
                 .route(GET("/zookeeper/instance"), zookeeperRequestHandler::getInstances)
                 .andRoute(GET("/zookeeper/instance/{id}"), zookeeperRequestHandler::getInstance)
                 .andRoute(GET("/zookeeper/stream/memory"), zookeeperRequestHandler::memoryStream)
+                .andRoute(POST("/fs/filestream"), zookeeperRequestHandler::fileStream)
                 ;
-
     }
 
 }

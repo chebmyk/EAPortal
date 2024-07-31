@@ -1,6 +1,5 @@
 package com.mc.eaportal.agent.config;
 
-
 import org.apache.curator.x.discovery.ServiceType;
 import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
 import org.springframework.cloud.zookeeper.serviceregistry.ServiceInstanceRegistration;
@@ -9,9 +8,7 @@ import org.springframework.cloud.zookeeper.serviceregistry.ZookeeperServiceRegis
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import oshi.SystemInfo;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -24,11 +21,7 @@ public class AgentConfig {
     @Bean
     public ZookeeperRegistration getZookeeperRegistration(ApplicationContext context, ZookeeperServiceRegistry serviceRegistry) throws UnknownHostException {
 
-
         SystemInfo systemInfo = new SystemInfo();
-        //systemInfo.getOperatingSystem().getNetworkParams().getHostName()
-
-
 
         Map<String, String> properties = new HashMap<>();
         properties.putIfAbsent("os.name", System.getProperty("os.name", "N/A"));
@@ -40,7 +33,6 @@ public class AgentConfig {
         properties.putIfAbsent("cpu.model", String.valueOf(systemInfo.getHardware().getProcessor().getProcessorIdentifier().getModel()));
         properties.putIfAbsent("cpu.cores", String.valueOf(systemInfo.getHardware().getProcessor().getPhysicalProcessorCount()));
 
-
         properties.putIfAbsent("gpu.count", String.valueOf(systemInfo.getHardware().getGraphicsCards().size()));
         AtomicInteger i = new AtomicInteger();
         systemInfo.getHardware().getGraphicsCards().forEach(gpu -> {
@@ -51,15 +43,12 @@ public class AgentConfig {
             properties.putIfAbsent(key+".version", String.valueOf(gpu.getVersionInfo()));
         });
 
-
         properties.putIfAbsent("memory.available", String.valueOf(systemInfo.getHardware().getMemory().getAvailable()));
         properties.putIfAbsent("memory.total", String.valueOf(systemInfo.getHardware().getMemory().getTotal()));
-
         String hostname = InetAddress.getLocalHost().getCanonicalHostName();
 
         ZookeeperInstance zookeeperInstance = new ZookeeperInstance(context.getId(),
                 context.getApplicationName(), properties);
-
 
         return  ServiceInstanceRegistration.builder()
                 .name("eagents")
@@ -68,7 +57,6 @@ public class AgentConfig {
                 .payload(zookeeperInstance)
                 .defaultUriSpec()
                 .build();
-
     }
 
 

@@ -27,3 +27,11 @@ export interface Part {
   value: string
   variable: boolean
 }
+
+
+export interface FsNode {
+  name: string
+  isDirectory: boolean
+  path: string
+  children: FsNode[]
+}

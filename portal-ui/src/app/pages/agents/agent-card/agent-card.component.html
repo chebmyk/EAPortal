@@ -1,4 +1,4 @@
-<p-card pRipple class="card styled-box-green shadow-2" (click)="gotoDetails(agent.id)" >
+<p-card (click)="gotoDetails(agent.id)" >
 
   <div class="grid" >
     <div class="col-12">
@@ -81,6 +81,22 @@
     <div class="col-2">
       <div class="text-right border-round-sm ">
         {{mem_current/1024/1024/1024 | number: '1.0-4'}} GB
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="text-left border-round-sm">
+        CPU Load
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="text-left border-round-sm ">
+        <p-meterGroup [value]="cpuUsageBoard" />
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="text-right border-round-sm ">
+        {{current_cpu_load*100 | number: '1.0-1'}} %
       </div>
     </div>
 

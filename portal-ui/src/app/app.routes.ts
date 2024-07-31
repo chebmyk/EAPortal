@@ -7,13 +7,13 @@ export const routes: Routes = [
   { path: 'agents',
     component: AgentsComponent
   },
-  { path: 'agents/:id',
-    component: AgentDetailsComponent
+  {
+    path: 'agents/:id',
+    loadChildren: () =>
+      import('./pages/agents/agent-details/agent-details.routes')
+        .then(m => m.AGENT_DETAILS_ROUTE)
   },
-  // {
-  //   path: 'items',
-  //   loadChildren: () => import('./items/items.module').then(m => m.ItemsModule)
-  // },
+
   { path: '',
     redirectTo: '/agents', pathMatch: 'full'
   }
