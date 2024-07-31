@@ -1,0 +1,13 @@
+<p-tree class="w-full md:w-30rem"
+        [value]="files"
+        selectionMode="single"
+        [(selection)]="selectedFile"
+        (onNodeSelect)="nodeSelect($event)"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="46"
+        scrollHeight="250px"
+/>
+
+<div>
+  {{filecontent}}
+</div>
