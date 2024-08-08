@@ -9,18 +9,15 @@ import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
-public class AppZookeeperServiceImpl  implements AppZookeeperService {
-
+public class ZookeeperServiceImpl implements ZookeeperService {
 
     private CuratorFramework curatorFramework;
     private ServiceDiscovery<ZookeeperInstance> serviceDiscovery;
     private ZookeeperDiscoveryProperties zookeeperDiscoveryProperties;
 
-    public AppZookeeperServiceImpl(CuratorFramework curatorFramework, ZookeeperDiscoveryProperties zookeeperDiscoveryProperties) {
+    public ZookeeperServiceImpl(CuratorFramework curatorFramework, ZookeeperDiscoveryProperties zookeeperDiscoveryProperties) {
         this.curatorFramework = curatorFramework;
         this.zookeeperDiscoveryProperties = zookeeperDiscoveryProperties;
         this.serviceDiscovery = ServiceDiscoveryBuilder.builder(ZookeeperInstance.class)

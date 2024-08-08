@@ -17,7 +17,7 @@ public class PropertyWatcher implements DependencyWatcherListener {
         this.discoveryClient = discoveryClient;
     }
 
-
+//todo review zookeeper events handling
     @Override
     public void stateChanged(String dependencyName, DependencyState newState) {
         System.out.println("Change detected: " + dependencyName);

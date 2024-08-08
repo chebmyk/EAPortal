@@ -7,7 +7,7 @@ export const AGENT_DETAILS_ROUTE: Routes = [
   { path: '',
     component: AgentDetailsComponent,
     children: [
-      { path: '',redirectTo: 'dashboard',pathMatch: 'full'},
+      // { path: '',redirectTo: 'dashboard',pathMatch: 'full'},
       {
         path: 'dashboard',
         component: AgentDashboardComponent

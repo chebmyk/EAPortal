@@ -11,8 +11,8 @@ class FileServiceTest {
     @Test
     void getFolderTree() {
         FileService fileService = new FileService();
-        Node node = fileService.getFolderTree("/Users/michael/Documents/Projects/Java/EAPortal/agent/src/main/java/com/mc/eaportal/agent");
-        assertEquals("agent", node.getName());
+        Node node = fileService.getFolderTree("../server/src/main/java/com/mc/eaportal");
+        assertEquals("eaportal", node.getName());
 //        assertTrue(node.isDirectory());
 //        assertEquals("src/test/resources", node.getPath());
 //        assertEquals(2, node.getChildren().size());

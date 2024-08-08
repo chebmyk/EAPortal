@@ -1,4 +1,43 @@
+<div class="w-full border-1 p-3">
 
-<p-tabMenu [model]="tabs" />
+  <div>
+    <div class="grid" >
+      <div class="border-2 col-12">
+        Agent: {{ agent.serviceId }}
+      </div>
+      <div class="col-8">
+        <span class="text-left">
+          <p-avatar
+            icon="pi pi-microchip"
+            [pTooltip]="agent.instanceId"
+            styleClass=""
+            [style]="{ 'background-color': '#ffffff', color: '#0090ff' }"
+            shape="circle"
+          />
+        </span>
+        <span class="text-left">
+          {{ agent.host }}
+        </span>
+      </div>
+      <div class="col-2">
+<!--        <div class="text-left">-->
+<!--          {{ agent?.address }}-->
+<!--        </div>-->
+      </div>
+      <div class="col-2">
+        <div class="text-right">
+          <i class="pi pi-spin pi-cog" style="font-size: 2rem; color: #0de60d"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<router-outlet></router-outlet>
+  <div class="w-full border-2">
+    <p-tabMenu [model]="tabs" />
+  </div>
+
+  <div class="w-full border-2">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

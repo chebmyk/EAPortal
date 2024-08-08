@@ -24,11 +24,20 @@ public class ZookeeperRouter {
     private ZookeeperRequestHandler zookeeperRequestHandler;
 
     @RouterOperations({
-            @RouterOperation(path = "/zookeeper/instance", method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstansces"),
-            @RouterOperation(path = "/zookeeper/instance/{id}", method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstance"),
-            @RouterOperation(path = "/zookeeper/stream/memory", produces = {MediaType.TEXT_EVENT_STREAM_VALUE} , method = RequestMethod.GET, beanClass = ZookeeperRequestHandler.class, beanMethod = "memoryStream"),
-            @RouterOperation(path = "/fs/filestream", produces = {MediaType.TEXT_EVENT_STREAM_VALUE} , method = RequestMethod.POST, beanClass = ZookeeperRequestHandler.class, beanMethod = "fileStream")
-
+            @RouterOperation(path = "/zookeeper/instance",
+                    method = RequestMethod.GET,
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstansces"),
+            @RouterOperation(path = "/zookeeper/instance/{id}",
+                    method = RequestMethod.GET,
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstance"),
+            @RouterOperation(path = "/stream/{id}/systemload",
+                    produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
+                    method = RequestMethod.GET,
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "memoryStream"),
+            @RouterOperation(path = "/fs/{id}/filestream",
+                    produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
+                    method = RequestMethod.POST,
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "fileStream"),
     }
     )
 
@@ -37,8 +46,9 @@ public class ZookeeperRouter {
         return RouterFunctions
                 .route(GET("/zookeeper/instance"), zookeeperRequestHandler::getInstances)
                 .andRoute(GET("/zookeeper/instance/{id}"), zookeeperRequestHandler::getInstance)
-                .andRoute(GET("/zookeeper/stream/memory"), zookeeperRequestHandler::memoryStream)
-                .andRoute(POST("/fs/filestream"), zookeeperRequestHandler::fileStream)
+                .andRoute(GET("/stream/{id}/systemload"), zookeeperRequestHandler::systemLoadStream)
+                .andRoute(GET("/fs/{id}/filetree"), zookeeperRequestHandler::getFileTree)
+                .andRoute(POST("/fs/{id}/filestream"), zookeeperRequestHandler::fileStream)
                 ;
     }
 

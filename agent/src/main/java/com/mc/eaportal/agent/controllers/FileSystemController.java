@@ -24,7 +24,6 @@ public class FileSystemController {
 
     @GetMapping("filetree")
     public ResponseEntity<Node> getInstance(String path) throws Exception {
-        path="/Users/michael/Documents/Projects/Java/EAPortal/agent/src/main/java/com/mc/eaportal/agent";
         Node result = fileService.getFolderTree(path);
         return ResponseEntity.ok(result);
     }

@@ -24,9 +24,9 @@ public class AgentConfig {
         SystemInfo systemInfo = new SystemInfo();
 
         Map<String, String> properties = new HashMap<>();
-        properties.putIfAbsent("os.name", System.getProperty("os.name", "N/A"));
-        properties.putIfAbsent("os.arch", System.getProperty("os.arch", "N/A"));
-        properties.putIfAbsent("os.version", System.getProperty("os.version", "N/A"));
+        properties.putIfAbsent("os.name", System.getProperty("os.name", "n/a"));
+        properties.putIfAbsent("os.arch", System.getProperty("os.arch", "n/a"));
+        properties.putIfAbsent("os.version", System.getProperty("os.version", "n/a"));
 
         properties.putIfAbsent("cpu.name", systemInfo.getHardware().getProcessor().getProcessorIdentifier().getName());
         properties.putIfAbsent("cpu.frequency", String.valueOf(systemInfo.getHardware().getProcessor().getMaxFreq()));
@@ -42,8 +42,6 @@ public class AgentConfig {
             properties.putIfAbsent(key+".vendor", String.valueOf(gpu.getVendor()));
             properties.putIfAbsent(key+".version", String.valueOf(gpu.getVersionInfo()));
         });
-
-        properties.putIfAbsent("memory.available", String.valueOf(systemInfo.getHardware().getMemory().getAvailable()));
         properties.putIfAbsent("memory.total", String.valueOf(systemInfo.getHardware().getMemory().getTotal()));
         String hostname = InetAddress.getLocalHost().getCanonicalHostName();
 

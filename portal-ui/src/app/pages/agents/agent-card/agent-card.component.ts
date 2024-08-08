@@ -9,6 +9,7 @@ import {DecimalPipe} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Ripple} from "primeng/ripple";
 import {Subscription} from "rxjs";
+import {angularMajorCompatGuarantee} from "@angular/cli/src/commands/update/schematic";
 
 @Component({
   selector: 'agent-card',
@@ -56,12 +57,15 @@ export class AgentCardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.mem_total = this.agent.payload.metadata["memory.total"];
+    console.log("Agent", this.agent)
+    this.mem_total = this.agent.metadata["memory.total"];
 
-    this.sseStream = this.agentsService.getSSE("http://localhost:8083/zookeeper/stream/memory")
+    let id = this.agent.instanceId
+
+    this.sseStream = this.agentsService.getSSE(`http://localhost:8083/stream/${id}/systemload`)
       .subscribe({
         next: (event: any) => {
-
+          console.log(event)
           if (event['lastEventId'] == "memory") {
             this.mem_current = event['data']
             this.mem_available = this.mem_current/this.mem_total*100;
@@ -93,8 +97,6 @@ export class AgentCardComponent implements OnInit, OnDestroy {
         error: (error: any) => console.log(error)
       })
 
-
-
   }
 
   ngOnDestroy() {
@@ -104,6 +106,6 @@ export class AgentCardComponent implements OnInit, OnDestroy {
   }
 
   gotoDetails(id: string) {
-    this.router.navigate([`/agents/${this.agent.id}`]);
+    this.router.navigate([`/agents/${this.agent.instanceId}`]);
   }
 }

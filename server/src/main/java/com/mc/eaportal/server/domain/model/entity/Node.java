@@ -1,4 +1,4 @@
-package com.mc.eaportal.agent.model;
+package com.mc.eaportal.server.domain.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

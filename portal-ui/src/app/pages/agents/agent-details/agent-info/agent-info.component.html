@@ -1,13 +1,119 @@
-<p-tree class="w-full md:w-30rem"
-        [value]="files"
-        selectionMode="single"
-        [(selection)]="selectedFile"
-        (onNodeSelect)="nodeSelect($event)"
-        [virtualScroll]="true"
-        [virtualScrollItemSize]="46"
-        scrollHeight="250px"
-/>
+<div >
 
-<div>
-  {{filecontent}}
+  <div class="grid">
+    <div class="col-fixed" style="max-width: 30rem">
+      <div class="text-left">
+        <!--  ==================== Folder Tree =========================-->
+          <div>
+            <p-scrollPanel class="border-1 w-full">
+              <p-tree
+                [value]="files"
+                [filter]="true"
+                selectionMode="single"
+                [(selection)]="selectedFile"
+                (onNodeSelect)="nodeSelect($event)"
+              />
+            </p-scrollPanel>
+          </div>
+
+      </div>
+    </div>
+    <div class="col">
+      <div class="text-left ">
+
+        <!--  ==================== File Menu Bar =========================-->
+
+          <div class="flex w-full border-2">
+
+            <div class="flex-1 p-1">
+              <span class="font-bold">File: {{ selectedFile?.name }}</span>
+            </div>
+            <div class="flex-1 p-1">
+
+              <p-meterGroup [value]="messages" labelPosition="start">
+                <ng-template pTemplate="label">
+                  <div class="flex flex-wrap gap-3">
+                    <ng-container *ngFor="let meterItem of messages; let index = index">
+<!--                      <p-card class="flex-1">-->
+                        <div class="flex justify-content-between gap-5">
+                          <div class="flex flex-row gap-4">
+                            <span class="w-1rem h-1rem border-circle inline-flex justify-content-center align-items-center text-center" [style]="{ 'background-color': meterItem.color, color: '#ffffff' }">
+<!--                            <i [class]="meterItem.icon"></i>-->
+                            </span>
+                            <span class="text-secondary ">{{ meterItem.label }}</span>
+                            <span class="font-bold ">{{ meterItem.value }}</span>
+                          </div>
+
+                        </div>
+<!--                      </p-card>-->
+                    </ng-container>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="meter" let-value let-class="class" let-width="size">
+                  <span [class]="class" [style]="{ background: value.color , width: width }">
+
+                  </span>
+                </ng-template>
+<!--                <ng-template pTemplate="start" let-totalPercent="totalPercent">-->
+<!--                  <div class="flex justify-content-between mt-3 mb-2 relative">-->
+<!--                    <span>0</span>-->
+<!--                    <span [style]="{ width: totalPercent + '%' }" class="absolute text-right">{{ totalPercent }}%</span>-->
+<!--                    <span class="font-medium">-->
+
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                </ng-template>-->
+<!--                <ng-template pTemplate="end">-->
+<!--                  <div class="flex justify-content-between mt-3">-->
+
+<!--                  </div>-->
+<!--                </ng-template>-->
+              </p-meterGroup>
+
+
+            </div>
+            <div class="flex-1 p-1 text-right">
+X
+            </div>
+          </div>
+
+
+        <!--  ==================== File Content =========================-->
+        <p-scrollPanel class="w-full">
+        <div class="w-full border-2" >
+
+          <div >
+
+            <div *ngFor="let line of filecontent; let i = index;">
+
+<!--            <div *ngFor="let line of (sseSubscription$ | async); let i = index ">-->
+
+              <div class="grid">
+                <div class="col-fixed">
+                  <div class="text-left">
+                    <span class="font-light w-2rem mt-2 text-blue-500 text-left">{{i+1}}:</span>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="text-left">
+                    <span class="font-light mt-2 text-left">{{line}}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+        </p-scrollPanel>
+
+
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
+

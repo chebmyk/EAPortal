@@ -1,17 +1,15 @@
-<p-card (click)="gotoDetails(agent.id)" >
+<p-card class="card styled-box-green shadow-2" (click)="gotoDetails(agent.instanceId)" >
 
   <div class="grid" >
     <div class="col-12">
-      <div pRipple class=" card text-primary bg-primary flex  justify-content-center align-items-center shadow-2">
-        Agent: {{ agent.name }}
-      </div>
+        Agent: {{ agent.serviceId }}
     </div>
 
     <div class="col-2">
       <div class="text-left">
         <p-avatar
           icon="pi pi-microchip"
-          [pTooltip]="agent.id"
+          [pTooltip]="agent.instanceId"
           styleClass=""
           [style]="{ 'background-color': '#dee9fc', color: '#1a2551' }"
           shape="circle"
@@ -20,7 +18,7 @@
     </div>
     <div class="col-8">
       <div class="text-left">
-        {{ agent.address }}
+        {{ agent.host }}
       </div>
     </div>
     <div class="col-2">
@@ -36,7 +34,7 @@
     </div>
     <div class="col-10">
       <div class="text-left flex-shrink-0">
-        {{ agent.payload.metadata["os.name"] }} ver.{{ agent.payload.metadata["os.version"] }}
+        {{ agent.metadata["os.name"] }} ver.{{ agent.metadata["os.version"] }}
       </div>
     </div>
 
@@ -48,9 +46,9 @@
     <div class="col-10">
       <div class="text-left border-round-sm ">
 <!--        {{ agent.payload.metadata["cpu.model"] }}-->
-        {{ agent.payload.metadata["cpu.name"] }}
-        {{ agent.payload.metadata["cpu.frequency"]/(1000*1000*1000) }} GHz
-        &#64; {{ agent.payload.metadata["cpu.cores"] }} Cores
+        {{ agent.metadata["cpu.name"] }}
+        {{ agent.metadata["cpu.frequency"]/(1000*1000*1000) }} GHz
+        &#64; {{ agent.metadata["cpu.cores"] }} Cores
       </div>
     </div>
 
@@ -61,10 +59,10 @@
     </div>
     <div class="col-10">
       <div class="text-left border-round-sm ">
-        {{ agent.payload.metadata["gpu0.vendor"] }}
-        {{ agent.payload.metadata["gpu0.name"] }}
-        {{ agent.payload.metadata["gpu0.frequency"]/(1000*1000*1000) }} GHz
-        &#64; {{ agent.payload.metadata["gpu0.version"] }}
+        {{ agent.metadata["gpu0.vendor"] }}
+        {{ agent.metadata["gpu0.name"] }}
+        {{ agent.metadata["gpu0.frequency"]/(1000*1000*1000) }} GHz
+        &#64; {{ agent.metadata["gpu0.version"] }}
       </div>
     </div>
 
@@ -103,7 +101,3 @@
   </div>
 
 </p-card>
-
-
-
-

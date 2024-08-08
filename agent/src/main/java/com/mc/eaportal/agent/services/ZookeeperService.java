@@ -5,6 +5,6 @@ import org.springframework.cloud.zookeeper.discovery.ZookeeperInstance;
 
 import java.util.Collection;
 
-public interface AppZookeeperService {
+public interface ZookeeperService {
     Collection<ServiceInstance<ZookeeperInstance>> getInstanceByName(String serviceName) throws Exception;
 }

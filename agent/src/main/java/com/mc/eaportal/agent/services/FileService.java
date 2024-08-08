@@ -25,12 +25,12 @@ public class FileService {
                     directory,
                     new HashSet<>()
             );
-
-            paths.skip(1).forEach(path -> {
+            paths.skip(1).forEach(path -> { //todo review skip logic for root folder
                 log.info(path.toString());
                 if (Files.isDirectory(path)) {
                     node.getChildren().add(getFolderTree(path.toString()));
                 } else {
+
                     Node child = new Node(
                         path.getFileName().toString(),
                         false,

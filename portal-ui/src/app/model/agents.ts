@@ -1,4 +1,17 @@
 export interface Agent {
+  host: string
+  instanceId: string
+  metadata: any
+  port: number
+  scheme: number
+  secure: boolean
+  serviceId: string
+  serviceInstance: ServiceInstance
+  uri: string
+}
+
+
+export interface ServiceInstance {
   name: string
   id: string
   address: string
@@ -31,7 +44,7 @@ export interface Part {
 
 export interface FsNode {
   name: string
-  isDirectory: boolean
+  directory: boolean
   path: string
   children: FsNode[]
 }

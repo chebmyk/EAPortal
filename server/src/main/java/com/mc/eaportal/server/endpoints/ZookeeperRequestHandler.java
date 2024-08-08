@@ -1,7 +1,11 @@
 package com.mc.eaportal.server.endpoints;
 
+import com.mc.eaportal.server.domain.model.entity.Node;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 import oshi.SystemInfo;
 import com.mc.eaportal.server.services.ZookeeperService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,15 +17,10 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromServerSentEvents;
+
 @Slf4j
 @Component
 public class ZookeeperRequestHandler {
@@ -48,46 +47,65 @@ public class ZookeeperRequestHandler {
         return  ServerResponse.ok().body(instance, ServiceInstance.class);
     }
 
-    public Mono<ServerResponse> memoryStream(ServerRequest serverRequest) {
-
-        Flux<ServerSentEvent<String>> memoryStream = Flux.interval(Duration.ofSeconds(2))
-                .map(i ->
-                        String.valueOf(systemInfo.getHardware().getMemory().getAvailable())
-                )
-                .map(mem -> ServerSentEvent.<String>builder()
-                        .id("memory")
-                        .data(mem).build()
-                );
-
-        Flux<ServerSentEvent<String>> cpuStream = Flux.interval(Duration.ofSeconds(2))
-                .map(i -> String.valueOf(systemInfo.getHardware().getProcessor().getSystemCpuLoad(2000)))
-                .map(cpu -> ServerSentEvent.<String>builder()
-                        .id("cpu")
-                        .data(cpu).build()
-                );
-
-        Flux<ServerSentEvent<String>> combinedStream = Flux.merge(memoryStream, cpuStream)
-                .flatMap(Flux::just)
+    public Mono<ServerResponse> systemLoadStream(ServerRequest serverRequest) {
+        Flux<ServerSentEvent<String>> sse =getWebClient()
+                .get()
+                .uri("/stream/systemload")
+                .retrieve()
+                .bodyToFlux(new ParameterizedTypeReference<ServerSentEvent<String>>() {})
                 .log();
-
-        return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM).body(fromServerSentEvents(combinedStream));
+        return ServerResponse.ok().contentType(MediaType.TEXT_EVENT_STREAM).body(fromServerSentEvents(sse));
     }
 
+
+
     public Mono<ServerResponse> fileStream(ServerRequest serverRequest) {
-        return serverRequest.bodyToMono(Map.class)
-                .flatMap(body -> {
-                    String filePath = (String) body.get("file");
-                    log.info("Reading file: " + filePath);
-                    Path path = Paths.get(filePath);
-                    Flux<String> fileStream = Flux.using(
-                            () -> Files.lines(path),
-                            Flux::fromStream,
-                            Stream::close
-                    ).flatMap(Flux::just).log();
-                    return ServerResponse
-                            .ok()
-                            .contentType(MediaType.TEXT_EVENT_STREAM)
-                            .body(fileStream, String.class);
-                });
+
+        Flux<String> fileStream =serverRequest
+                 .bodyToMono(Map.class)
+                 .flatMapMany( body -> {
+                                String filePath =String.valueOf(body.get("file"));
+                                log.info("filePath: {}", filePath);
+
+                                return getWebClient()
+                                        .post()
+                                        .uri("/fs/filestream")
+                                        .header("Content-Type","application/json")
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .body(BodyInserters.fromValue(body))
+                                        .accept(MediaType.TEXT_EVENT_STREAM)
+                                        .retrieve()
+                                        .bodyToFlux(String.class)
+                                        .log()
+                                ;
+                            }
+                        );
+
+
+        return  ServerResponse
+                .ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(fileStream, String.class);
+
+    }
+
+
+    private WebClient getWebClient() {
+        return WebClient.builder()
+                .baseUrl("http://localhost:8081") // todo read from ZookeeperInstance
+                .build();
+    }
+
+    public Mono<ServerResponse> getFileTree(ServerRequest serverRequest) {
+        Mono<Node> treeNode =getWebClient()
+                .get()
+                .uri("/fs/filetree")
+                .retrieve()
+                .bodyToMono(Node.class)
+                .log();
+        return ServerResponse
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(treeNode, Node.class);
     }
 }

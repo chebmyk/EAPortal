@@ -1,0 +1,44 @@
+.module {
+  //max-width: 250px;
+  //padding: 1rem;
+  color: white;
+  border-width: 3px;
+  border-style: solid;
+  border-image:
+    linear-gradient(
+        to bottom,
+        red,
+        rgba(0, 0, 0, 0)
+    ) 1 100%;
+}
+
+.gradient-box {
+
+  display: flex;
+  align-items: center;
+  //width: 50vw;
+  width: 95%;
+  margin: auto;
+  //max-width: 22em;
+
+  position: relative;
+  padding:  0em;
+  box-sizing: border-box;
+
+  $border: 3px;
+  color: #FFF;
+  background: #000;
+  background-clip: padding-box; /* !importanté */
+  border: solid $border transparent; /* !importanté */
+  border-radius: 1em;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -1;
+    margin: -$border; /* !importanté */
+    border-radius: inherit; /* !importanté */
+    background: linear-gradient(to right, #0090ff, #ffce0a);
+  }
+}

@@ -1,55 +1,68 @@
-<div class="grid">
+<div class="relative h-screen p-1 ">
+<!--======================  HEADER ============================================-->
+<div class="block p-1 m-1 border-1 border-round" style="height: 5rem">
+  <div class="flex flex-row flex-nowrap">
 
-  <div class="col-12">
-    <div class="grid">
-      <div class="col-fixed" style="width:150px">
-        <div class="text-left p-2 border-round-sm  ">
-          <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
-            <p-avatar
-              label="AP"
-              styleClass="mr-2"
-              [style]="{'background-color': 'rgba(25,97,222,0.7)', color: '#ffffff' }"
-              shape="circle" />
-          </a> LOGO
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="text-center p-2 border-round-sm  ">Application Portal</div>
-      </div>
-
-      <div class="col-fixed" style="width:100px">
-        <div class="text-center p-2 border-round-sm ">
+    <div class="flex-initial flex align-items-center justify-content-center border-1 font-bold border-round m-1">
+      <div class="text-center p-2">
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
           <p-avatar
+            label="AP"
+            styleClass="mr-2"
+            [style]="{'background-color': 'rgba(25,97,222,0.7)', color: '#ffffff' }"
+            shape="circle" />
+        </a> LOGO
+      </div>
+    </div>
+
+    <div class="flex-grow-1 flex align-items-center justify-content-center border-1 font-bold border-round m-1">
+      <div class="text-center p-2">
+        Application name
+      </div>
+    </div>
+
+    <div class="flex-initial flex align-items-center justify-content-center border-1 font-bold border-round m-1">
+      <div class="text-center p-2">
+        <p-avatar
           icon="pi pi-user"
           styleClass="mr-2"
-          [style]="{'background-color': 'rgba(25,222,110,0.7)', color: '#ffffff' }"
+          [style]="{'background-color': 'rgb(0,144,255)', color: '#ffffff' }"
           shape="circle" />
-        </div>
       </div>
     </div>
+
+  </div>
+</div>
+<!--======================  END HEADER ============================================-->
+
+<!--====================== CONTENT     ============-->
+
+<div style="min-height:calc(100% - 7rem);" class="block p-1 m-1 border-1 border-round">
+
+  <div class="flex flex-nowrap">
+
+    <!--====================== Menu     ============-->
+    <div class="flex h-full p-2 border-1 border-round">
+      <p-menu [model]="mainMenu" />
+    </div>
+
+    <!--====================== Main Screen==========-->
+    <div class="flex-grow-1 border-1 border-blue-300 border-round">
+        <router-outlet></router-outlet>
+    </div>
+
   </div>
 
-  <div class="col-12">
-    <div class="grid">
+</div>
+<!--========== END CONTENT ============-->
 
-      <div class="col-fixed" style="width:200px">
-        <div class="text-left border-round-sm ">
-
-          <p-menu [model]="mainMenu" />
-<!--          <a routerLink="/agents" routerLinkActive="active" ariaCurrentWhenActive="page">Agents</a>-->
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="border-round-sm">
-
-          <router-outlet></router-outlet>
-
-        </div>
-      </div>
-    </div>
+<!--========== FOOTER ============-->
+<div style="height: 1.5rem">
+  <div>
+    © 2024 The World Bank Group
   </div>
 </div>
 
+<!--========== END FOOTER ============-->
+</div>
 
