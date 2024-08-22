@@ -23,7 +23,8 @@ public class ZookeeperRouter {
     @Autowired
     private ZookeeperRequestHandler zookeeperRequestHandler;
 
-    @RouterOperations({
+    @RouterOperations(
+            {
             @RouterOperation(path = "/zookeeper/instance",
                     method = RequestMethod.GET,
                     beanClass = ZookeeperRequestHandler.class, beanMethod = "getInstansces"),
@@ -33,12 +34,20 @@ public class ZookeeperRouter {
             @RouterOperation(path = "/stream/{id}/systemload",
                     produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
                     method = RequestMethod.GET,
-                    beanClass = ZookeeperRequestHandler.class, beanMethod = "memoryStream"),
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "systemLoadStream"),
+            @RouterOperation(path = "/fs/{id}/filetree",
+                            produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
+                            method = RequestMethod.GET,
+                            beanClass = ZookeeperRequestHandler.class, beanMethod = "getFileTree"),
             @RouterOperation(path = "/fs/{id}/filestream",
                     produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
                     method = RequestMethod.POST,
                     beanClass = ZookeeperRequestHandler.class, beanMethod = "fileStream"),
-    }
+            @RouterOperation(path = "/fs/{id}/filemetadata",
+                    produces = {MediaType.TEXT_EVENT_STREAM_VALUE},
+                    method = RequestMethod.POST,
+                    beanClass = ZookeeperRequestHandler.class, beanMethod = "fileMetaData"),
+            }
     )
 
     @Bean
@@ -49,6 +58,7 @@ public class ZookeeperRouter {
                 .andRoute(GET("/stream/{id}/systemload"), zookeeperRequestHandler::systemLoadStream)
                 .andRoute(GET("/fs/{id}/filetree"), zookeeperRequestHandler::getFileTree)
                 .andRoute(POST("/fs/{id}/filestream"), zookeeperRequestHandler::fileStream)
+                .andRoute(POST("/fs/{id}/filemetadata"), zookeeperRequestHandler::fileMetaData)
                 ;
     }
 

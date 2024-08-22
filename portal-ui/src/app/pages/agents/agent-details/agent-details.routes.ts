@@ -4,7 +4,8 @@ import {AgentDashboardComponent} from "./agent-dashboard/agent-dashboard.compone
 import {AgentInfoComponent} from "./agent-info/agent-info.component";
 
 export const AGENT_DETAILS_ROUTE: Routes = [
-  { path: '',
+  {
+    path: '',
     component: AgentDetailsComponent,
     children: [
       // { path: '',redirectTo: 'dashboard',pathMatch: 'full'},

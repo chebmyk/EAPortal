@@ -6,12 +6,13 @@ import {CommonModule} from "@angular/common";
 import {AvatarModule} from "primeng/avatar";
 import {Agent} from "../../../model/agents";
 import {AgentsService} from "../agents.service";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @Component({
   selector: 'app-agent-details',
   standalone: true,
   imports: [
-    TabMenuModule, CommonModule, AvatarModule
+    TabMenuModule, CommonModule, AvatarModule, ProgressSpinnerModule
   ],
   templateUrl: './agent-details.component.html',
   styleUrl: './agent-details.component.scss'

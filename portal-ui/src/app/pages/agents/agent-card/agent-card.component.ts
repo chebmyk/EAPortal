@@ -6,10 +6,9 @@ import {TooltipModule} from "primeng/tooltip";
 import {AvatarModule} from "primeng/avatar";
 import {AgentsService} from "../agents.service";
 import {DecimalPipe} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Ripple} from "primeng/ripple";
 import {Subscription} from "rxjs";
-import {angularMajorCompatGuarantee} from "@angular/cli/src/commands/update/schematic";
 
 @Component({
   selector: 'agent-card',
@@ -39,7 +38,6 @@ export class AgentCardComponent implements OnInit, OnDestroy {
   mem_used: number = 0;
   mem_total: number = 0;
   mem_current: number = 0;
-
   current_cpu_load=0;
 
 
@@ -60,9 +58,8 @@ export class AgentCardComponent implements OnInit, OnDestroy {
     console.log("Agent", this.agent)
     this.mem_total = this.agent.metadata["memory.total"];
 
-    let id = this.agent.instanceId
 
-    this.sseStream = this.agentsService.getSSE(`http://localhost:8083/stream/${id}/systemload`)
+    this.sseStream = this.agentsService.getAgentSystemLoad(this.agent.instanceId)
       .subscribe({
         next: (event: any) => {
           console.log(event)
@@ -77,26 +74,10 @@ export class AgentCardComponent implements OnInit, OnDestroy {
           }
           if (event['lastEventId'] == "cpu") {
             this.current_cpu_load = event['data']
-
-            // this.cpuUsageBoard  = [
-            //   { label: 'Load', color: 'rgb(246,213,0)', value: this.current_cpu_load*100 },
-            //   { label: 'Available', color: 'rgba(15,159,236,0.89)', value: 100-this.current_cpu_load*100}
-            // ];
-
-
-            // this.mem_current = event['data']
-            // this.mem_available = this.mem_current/this.mem_total*100;
-            // this.mem_used = 100 - this.mem_available;
-            // this.memoryUsageBoard = [
-            //   { label: 'Used', color: 'rgb(246,213,0)', value: this.mem_used },
-            //   { label: 'Available', color: 'rgba(15,159,236,0.89)', value: this.mem_available }
-            // ];
           }
-
         },
         error: (error: any) => console.log(error)
       })
-
   }
 
   ngOnDestroy() {
@@ -108,4 +89,5 @@ export class AgentCardComponent implements OnInit, OnDestroy {
   gotoDetails(id: string) {
     this.router.navigate([`/agents/${this.agent.instanceId}`]);
   }
+
 }

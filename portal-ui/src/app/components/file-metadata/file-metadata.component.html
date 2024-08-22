@@ -1,0 +1,37 @@
+<ng-container *ngIf="!!fsNode">
+
+<div class="grid">
+
+  <div class="col-fixed" style="width:25px">
+    <div class="text-center">
+      <i [class]="fsNode.directory ? 'pi pi-folder text-yellow-500':'pi pi-file text-blue-500'"></i>
+    </div>
+  </div>
+
+  <div class="col-5">
+    <div class="text-center">
+      {{ fsNode.name }}
+    </div>
+  </div>
+
+  <ng-template *ngIf="!!fsNode.attributes">
+    <div class="col-2">
+      <div class="text-center">
+        {{ convertSize(fsNode.attributes.size) }}
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="text-center">
+        {{ fsNode.attributes.creationTime }}
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="text-center">
+        {{ fsNode.attributes.lastModifiedTime }}
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+
+</ng-container>

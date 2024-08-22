@@ -1,6 +1,12 @@
 <div class="w-full border-1 p-3">
 
-  <div>
+  <ng-template #loader>
+    <div class="text-center">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  </ng-template>
+
+  <div *ngIf="!!agent; else loader">
     <div class="grid" >
       <div class="border-2 col-12">
         Agent: {{ agent.serviceId }}
